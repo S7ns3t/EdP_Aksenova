@@ -49,6 +49,7 @@ namespace EdP_Aksenova.Pages
             if (_currentAdvertisement.ID == 0) 
             {
                 _currentAdvertisement.Vendor = barmoley.UserLogin;
+                _currentAdvertisement.PublicationDate = DateTime.Now;
                 Entities.Instance.Advertisement.Add(_currentAdvertisement);
             }
             //try

@@ -62,5 +62,19 @@ namespace EdP_Aksenova.Pages
             }
             catch { MessageBox.Show("Ошибка при удалении данных! Помолитесь господу..."); }
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var finishedAdverts = Entities.Instance.Advertisement.Where(a => a.Vendor == barmoley.UserLogin && a.IsFinished);
+            ListAdvertisements.ItemsSource = finishedAdverts.ToList();
+            txtRevenue.Text = "Выручка: " + finishedAdverts.Sum(x => x.Cost).ToString();
+            txtRevenue.Visibility = Visibility.Visible;
+        }
+
+        private void chkShowFinished_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ListAdvertisements.ItemsSource = Entities.Instance.Advertisement.Where(a => a.Vendor == barmoley.UserLogin).ToList();
+            txtRevenue.Visibility = Visibility.Hidden;
+        }
     }
 }

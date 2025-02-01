@@ -35,13 +35,14 @@ namespace EdP_Aksenova.Pages
 
 
             var user = Entities.Instance.User.FirstOrDefault(u => u.Username == txtUsername.Text && u.Password == pwdPassword.Password);
-            if (user != null)
+            if (user == null)
             {
-               MessageBox.Show("Авторизация успешна, переход на главную страницу");
-               barmoley.IsUserLoggedIn = true;
-               barmoley.UserLogin = user.Username;
+                MessageBox.Show("Пользователь с такими данными не найден!");
+                return;
             }
-
+            MessageBox.Show("Авторизация успешна, переход на главную страницу");
+            barmoley.IsUserLoggedIn = true;
+            barmoley.UserLogin = user.Username;
             NavigationService.GoBack();
         }
 
